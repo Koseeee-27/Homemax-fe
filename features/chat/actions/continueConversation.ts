@@ -16,7 +16,7 @@ export interface ChatState {
 
 const API_BASE_URL = process.env.API_BASE_URL;
 
-export async function continueConversation(
+export async function sendLetter(
   // ★ prevState を無視する（引数名は必要）
   prevState: ChatState,
   formData: FormData
