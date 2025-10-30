@@ -1,13 +1,11 @@
-// app/(main)/chat/components/MainChatUI.tsx
 "use client";
 
 import { useActionState } from "react";
-
 import MessageInputBar from "./MessageInputBar";
 import Image from "next/image";
 import HomemaxMessageBubble from "./HomemaxMessageBubble";
 import UserMessageBubble from "./UserMessageBubble";
-import { ChatState, continueConversation } from "../actions/continueConversation";
+import { ChatState, sendLetter } from "../actions/continueConversation";
 import { User } from "@/features/auth/utils/authAtoms";
 import { useFormStatus } from "react-dom";
 
@@ -33,24 +31,21 @@ function CharacterImage() {
 
 
 export default function MainChatUI({ user }: { user: User }) {
-  const [state, formAction] = useActionState(continueConversation, initialState);
+  const [state, formAction] = useActionState(sendLetter, initialState);
 
   // ★ 3. stateから最新のメッセージ（配列ではなく単一オブジェクト）を取得
   const homemaxMessage = state.latestHomemaxMessage?.content;
   const userMessage = state.latestUserMessage?.content;
 
   return (
-    // ★ 1. このコンポーネント自体を <form> に変更
     <form action={formAction} className="flex-1 flex flex-col">
-      <div className="flex-1 flex">
-        <div className="flex-1">
-        </div>
+      <div className="flex-1 flex flex-col justify-center items-center relative">
         <div className="flex-1 flex flex-col items-center justify-center">
           <HomemaxMessageBubble message={homemaxMessage} />
           <CharacterImage />
-        </div>
-        <div className="flex-1 flex items-center justify-start">
-          <UserMessageBubble message={userMessage} />
+          <div className="absolute top-4 max-w-md w-full px-4">
+            <UserMessageBubble message={userMessage} />
+          </div>
         </div>
       </div>
       <div className="">

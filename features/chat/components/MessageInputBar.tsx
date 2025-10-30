@@ -1,4 +1,3 @@
-// app/(main)/chat/components/MessageInputBar.tsx
 "use client";
 
 import { useFormStatus } from "react-dom";
